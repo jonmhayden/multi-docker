@@ -9,10 +9,10 @@ script:
   - docker run -e CI=true barefootjon/react-test npm test
 
 after_success:
-  - docker build -t barefootjon/multi-client -f ./client
-  - docker build -t barefootjon/multi-nginx -f ./nginx
-  - docker build -t barefootjon/multi-server -f ./server
-  - docker build -t barefootjon/multi-worker -f ./worker
+  - docker build -t barefootjon/multi-client -f ./client/Dockerfile ./client
+  - docker build -t barefootjon/multi-nginx -f ./nginx/Dockerfile ./nginx
+  - docker build -t barefootjon/multi-server -f ./server/Dockerfile ./server
+  - docker build -t barefootjon/multi-worker -f ./worker/Dockerfile ./worker
   # Login to docker cli
   - echo "DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take images and push to docker hub

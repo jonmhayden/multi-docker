@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t jonmhayden/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t barefootjon/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true jonmhayden/react-test npm test
+  - docker run -e CI=true barefootjon/react-test npm test
 
 after_success:
-  - docker build -t jonmhayden/multi-client -f ./client
-  - docker build -t jonmhayden/multi-nginx -f ./nginx
-  - docker build -t jonmhayden/multi-server -f ./server
-  - docker build -t jonmhayden/multi-worker -f ./worker
+  - docker build -t barefootjon/multi-client -f ./client
+  - docker build -t barefootjon/multi-nginx -f ./nginx
+  - docker build -t barefootjon/multi-server -f ./server
+  - docker build -t barefootjon/multi-worker -f ./worker
   # Login to docker cli
   - echo "DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take images and push to docker hub
-  - docker push jonmhayden/multi-client
-  - docker push jonmhayden/multi-nginx
-  - docker push jonmhayden/multi-server
-  - docker push jonmhayden/multi-worker
+  - docker push barefootjon/multi-client
+  - docker push barefootjon/multi-nginx
+  - docker push barefootjon/multi-server
+  - docker push barefootjon/multi-worker
